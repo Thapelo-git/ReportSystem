@@ -20,5 +20,5 @@ const fire = firebase.initializeApp({
 //   const analytics = getAnalytics(app);
 export const auth = fire.auth();
 //export const db = fire.firestore();
-export const db=fire.database();
+export const db=firebase.database();
 export default {fire,};

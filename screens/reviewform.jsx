@@ -5,16 +5,19 @@ import {Formik} from 'formik';
 import * as yup from 'yup'
 
 const Reviewform = ({addUser}) => {
-    const password=useRef({})
+    //const password=useRef({})
    // password.current=watch('password','')
+
     const ReviewSchem = yup.object({
+        name:yup.string().required().min(2),
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
-        confirmPassword:yup.string().required().test('is-num-1-100','gender must be Female/Male',
+        confirmPassword:yup.string().required().test('is-num-1-100','The password does not match',
         (val)=>{
-            return val == password.current || 'The password does not match';
+            return val == val;
         }
         ),
+        
         //confirmPassword:yup.string().required().min(4),
         // Age:yup.string().required().test('is-num-1-100','Age must be number 1- 100',
         // (val)=>{
@@ -28,7 +31,7 @@ const Reviewform = ({addUser}) => {
         <>
            <View>
                <Formik 
-               initialValues={{email:'',password:'',confirmPassword:''}}
+               initialValues={{name:'',email:'',password:'',confirmPassword:''}}
                validationSchema={ReviewSchem}
                onSubmit={(values,action)=>{
                    action.resetForm()
@@ -38,6 +41,16 @@ const Reviewform = ({addUser}) => {
 
                    {(props)=>(
                        <View>
+                            <TextInput 
+                           style={styles.input}
+                           mode="outlined"
+                           label="Name"
+                           placeholder='Enter name..'
+                           onChangeText={props.handleChange('name')}
+                           value={props.values.name}
+                           onBlur={props.handleBlur('name')}
+                           />
+                           <Text style={styles.errortext}>{props.touched.name && props.errors.name}</Text>
                            <TextInput 
                            style={styles.input}
                            mode="outlined"

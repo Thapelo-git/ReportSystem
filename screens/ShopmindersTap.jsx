@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { StyleSheet, Text, View ,TouchableHighlight,
 ToastAndroid,TouchableOpacity,Image} from 'react-native'
 import { auth } from './firebase'
+import {db} from './firebase'
 import { Avatar,Button } from 'react-native-paper'
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native'
 const ShopmindersTap = () => {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [name,setName]=useState()
+    const [list,setList]=useState([])
+    const user = auth.currentUser;
+    useEffect(()=>{
+      db.ref(`/user/${user.uid}`).on('value',snap=>{
+        
+        setName(snap.val().name);
+        
+      })
+      
+    },[])
+    
     const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
     }
@@ -32,7 +45,9 @@ const ShopmindersTap = () => {
               source={{ uri: selectedImage.localUri }}
               style={styles.thumbnail}
             />
-             <Text style={{fontWeight:'bold',fontSize:30}}>{auth.currentUser?.email}</Text>
+             {/* {auth.currentUser?.email} */}
+                        {/* <Text style={{fontWeight:'bold',fontSize:30}}></Text>  */}
+           
              <Button mode="contained" onPress={openImagePickerAsync}>
             Upload ur own image
             </Button> 
@@ -112,10 +127,12 @@ const ShopmindersTap = () => {
               source={{ uri: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-600w-193292033.jpg'}}
               style={styles.thumbnail}
             />
-   <Text style={{fontWeight:'bold',fontSize:30}}>{auth.currentUser?.email}</Text>
+             {/* <Text style={{fontWeight:'bold',fontSize:30}}>{auth.currentUser?.email}</Text> */}
+
              <Button mode="contained" onPress={openImagePickerAsync}>
             Upload ur own image
             </Button> 
+           <Text>{name}</Text>
         </View>
     )
 }

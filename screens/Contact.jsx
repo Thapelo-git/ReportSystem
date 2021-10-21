@@ -6,7 +6,7 @@ import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import { TextInput,Button } from 'react-native-paper';
 import Loginform from './Loginform';
 import { auth } from './firebase';
-//import {auth} from '../../firebase'
+
 const Contact = ({navigation}) => {
   const setToastMsg =msg=>{
     ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)

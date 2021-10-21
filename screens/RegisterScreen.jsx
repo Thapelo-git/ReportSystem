@@ -3,19 +3,30 @@ import { StyleSheet, Text, View,SafeAreaView } from 'react-native'
 import Reviewform from './reviewform'
 import { TextInput,Button } from 'react-native-paper';
 import {auth} from './firebase'
+import {db} from './firebase'
 import { Alert,ToastAndroid } from 'react-native';
 const RegisterScreen = ({navigation}) => {
   const setToastMsg =msg=>{
     ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
 }
+//then(res =>{
+ // res.user.sendEmailVerification().
     const addUser= async (data)=>{
       try{
-        const {email,password} =data
+        const {email,password,name} =data
       const user = await auth
       .createUserWithEmailAndPassword(
         email.trim().toLowerCase(),password
-      );
+      ).then(res =>{
+        db.ref(`/user`).child(res.user.uid).set({
+          name:name,
+          email:email,
+          uid:res.user.uid
+        })
+        })
+      
      setToastMsg('succesfully registered')
+
       }
       catch(error){
         if(error.code === 'auth/email-already-in-use'){
