@@ -36,7 +36,7 @@ const RegisterScreen = ({navigation}) => {
         }
         if(error.code === 'auth/invalid-email'){
           Alert.alert(
-            'That email address is invalid.'
+            'That email address is invalid'
           )
         }
         else{
