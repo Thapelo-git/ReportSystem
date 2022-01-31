@@ -6,19 +6,38 @@ import {db} from './firebase'
 import { Avatar,Button } from 'react-native-paper'
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native'
+
+// import storage from '@react-native-firebase/storage';
 const ShopmindersTap = () => {
     const [selectedImage, setSelectedImage] = useState(null);
-    const [name,setName]=useState()
+    const [name,setName]=useState('')
+    const [Phonenumber,setPhonenumber]=useState('')
+  const [Password,setPassword]=useState('')
     const [list,setList]=useState([])
-    const user = auth.currentUser;
+    const user = auth.currentUser.uid;
     useEffect(()=>{
-      db.ref(`/user/${user.uid}`).on('value',snap=>{
+      db.ref(`/user/`+ user).on('value',snap=>{
         
-        setName(snap.val().name);
-        
+        setName(snap.val() && snap.val().name);
+setPhonenumber(snap.val().Phonenumber)
+
       })
       
     },[])
+  
+      
+      // const dbRef =db.ref();
+      // dbRef.child("user").child(user).get().then((snapshot) => {
+      //   if (snapshot.exists()) {
+      //     console.log(snapshot.val());
+      //   } else {
+      //     console.log("No data available");
+      //   }
+      // }).catch((error) => {
+      //   console.error(error);
+      // });
+      
+    
     
     const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
@@ -57,7 +76,14 @@ const ShopmindersTap = () => {
           </View>
         );
       }
-    
+      const [imageName,setImageName]=useState('imge')
+    db
+    .storage
+    .ref(imageName)
+    .putfile(selectedImage)
+    .then((snap)=>{
+console.log(`${imageName}`)
+    })
     // const options={
     //     title:'pick an image',
     //     storageOptions:{
@@ -133,6 +159,8 @@ const ShopmindersTap = () => {
             Upload ur own image
             </Button> 
            <Text>{name}</Text>
+           <Text>{Phonenumber}</Text>
+           <Text>{Password}</Text>
         </View>
     )
 }

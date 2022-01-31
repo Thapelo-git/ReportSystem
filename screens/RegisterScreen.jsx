@@ -13,7 +13,7 @@ const RegisterScreen = ({navigation}) => {
  // res.user.sendEmailVerification().
     const addUser= async (data)=>{
       try{
-        const {email,password,name} =data
+        const {uid,email,password,name,Phonenumber} =data
       const user = await auth
       .createUserWithEmailAndPassword(
         email.trim().toLowerCase(),password
@@ -21,6 +21,7 @@ const RegisterScreen = ({navigation}) => {
         db.ref(`/user`).child(res.user.uid).set({
           name:name,
           email:email,
+          Phonenumber:Phonenumber,
           uid:res.user.uid
         })
         })

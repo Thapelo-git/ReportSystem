@@ -10,6 +10,7 @@ const Reviewform = ({addUser}) => {
 
     const ReviewSchem = yup.object({
         name:yup.string().required().min(2),
+        Phonenumber:yup.string().required().min(2),
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
         confirmPassword:yup.string().required().test('is-num-1-100','The password does not match',
@@ -31,7 +32,7 @@ const Reviewform = ({addUser}) => {
         <>
            <View>
                <Formik 
-               initialValues={{name:'',email:'',password:'',confirmPassword:''}}
+               initialValues={{name:'',Phonenumber:'',email:'',password:'',confirmPassword:''}}
                validationSchema={ReviewSchem}
                onSubmit={(values,action)=>{
                    action.resetForm()
@@ -51,6 +52,16 @@ const Reviewform = ({addUser}) => {
                            onBlur={props.handleBlur('name')}
                            />
                            <Text style={styles.errortext}>{props.touched.name && props.errors.name}</Text>
+                           <TextInput 
+                           style={styles.input}
+                           mode="outlined"
+                           label="Phone Number"
+                           placeholder='Enter Phonenumber..'
+                           onChangeText={props.handleChange('Phonenumber')}
+                           value={props.values.Phonenumber}
+                           onBlur={props.handleBlur('Phonenumber')}
+                           />
+                           <Text style={styles.errortext}>{props.touched.Phonenumber && props.errors.name}</Text>
                            <TextInput 
                            style={styles.input}
                            mode="outlined"

@@ -26,7 +26,7 @@ export default function Home(){
     auth.onAuthStateChanged((user)=>{
         if(user){
             setSignedIn(true);
-           
+           console.log(user.uid,"user------------")
         }else{
          
             setSignedIn(false);
