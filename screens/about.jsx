@@ -1,112 +1,150 @@
-import React from 'react'
-import { StyleSheet,View,Text,Image,SafeAreaView, ScrollView} from 'react-native';
+import React ,{ useState, useContext, useEffect }from 'react'
+import { StyleSheet,View,Text,Image,SafeAreaView, ScrollView,
+ActivityIndicator,} from 'react-native';
+import { Bubble, Send, SystemMessage,GiftedChat } from 'react-native-gifted-chat';
+import {  IconButton } from 'react-native-paper';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import { auth } from './firebase';
+import { fdb } from './firebase';
 
-
-export default function About(){
+export default function About({route}){
+    const [messages,setMessages]=useState([])
+    // const { thread} =route.params const title:route.params.thread.name
+//const  thread =route.params._id
     
+    const user = auth.currentUser;
+    //const currentUser = user.toJSON();
+    const currentUser = user
+    const handleSend = async (messages) =>{
+      const text = messages[ 0].text;
+
+      fdb
+      .collection('THREADS')
+      .doc(currentUser.uid)
+      .collection('MESSAGES')
+      .add({
+        text,
+        createdAt: new Date().getTime(),
+        user: {
+          _id: currentUser.uid,
+          email: currentUser.email,
+          name:currentUser.displayName
+        }
+      });
+      
+    // await fdb
+    // .collection('THREADS')
+    // .doc(currentUser.uid)
+    // .set(
+    //   {
+    //     latestMessage: {
+    //       text,
+    //       createdAt: new Date().getTime()
+    //     }
+    //   },
+    //   { merge: true }
+    // );
+
+    }
+
+    useEffect(()=>{
+      const messageslistener =fdb
+      .collection('THREADS')
+      .doc(currentUser.uid)
+      .collection('MESSAGES')
+      .orderBy('createdAt','desc')
+      .onSnapshot(querySnapshot=>{
+        const messages=querySnapshot.docs.map(doc =>{
+          const firebaseData = doc.data();
+          const data ={
+            _id:doc.id,
+            text:'',
+            createdAt:new Date().getTime(),
+            ...firebaseData
+          };
+          if(!firebaseData.system){
+            
+         
+            data.user ={
+              ...firebaseData.user,
+              name:firebaseData.user.email,
+
+            };
+          }
+          return data;
+        })
+        setMessages(messages)
+      })
+      return()=>messageslistener();
+    },[])
+
+    const renderBubble=(props)=>{
+      <Bubble
+      {...props}
+      wrapperStyle={{
+        right:{
+          backgroundColor:'blue'
+        }
+      }}
+      textStyle={{
+        right:{
+          color:'#fff'
+        }
+      }}
+      />
+    }
+
+    const renderLoading=()=>{
+      return(
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size='large' color='blue'/>
+        </View>
+      )
+    }
+    const renderSend=(props)=>{
+      return(
+        <Send {...props}>
+          <View style={styles.sendingContainer}>
+            <IconButton icon='send-circle' size={32} color='blue' />
+          </View>
+
+        </Send>
+      )
+    }
+    const scrollToBottomComponent=()=>{
+      return(
+        <View>
+          <IconButton icon='chevron-double-down' size={36} color='blue'/>
+        </View>
+      )
+    }
+    const renderSystemMessage=(props)=>{
+      return(
+        <SystemMessage 
+        {...props}
+        wrapperStyle={styles.systemMessageWrapper}
+        textStyle={styles.systemMessageText}
+          />
+      )
+    }
     return(
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-            <View style={{backgroundColor:'#fff',
-        flex:1,flexDirection:'row'}}>
-            <View style={{backgroundColor:'grey',flex:1,
-    alignItems:'center'}}>
-        <Text style={{fontWeight:'bold',paddingTop:1,fontSize:40,lineHeight:84}}>
-              Thapelo Chaba
-            </Text>
-         <Image
-            style={{width:150,height:200,borderRadius:50,borderColor:'white'}}
-            source={require('../assets/picc.png')}/>
-            <View style={{backgroundColor:'white',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Contacts</Text>
-
-            </View>
-            <Icon   name="phone" size={30} color='black'/>
-            <Text>Phone Number : 0766465828</Text>
-            {/* <Icon   name="Location" size={30} color='black'/> */}
-            <Text>Address : Moletjie Ga-Makgwakgwana 0709</Text>
-            <Icon   name="email" size={30} color='black'/>
-            <Text>Email : chabathapelo1@gmail.com</Text>
-            <Icon   name="facebook" size={30} color='black'/>
-            <Text>Facebook : thapelo chaba</Text>
-            <View style={{backgroundColor:'white',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Profile</Text>
-            </View>
-            
-            <Text>
-            Thapelo is a flexible,posses excellent time keeping skills .
-             I am an self-motivated,responsible and hard working person.
-              I am a mature team worker and adaptable to all challenging 
-              situations.
-               I am able to work well both 
-            in a team environment as well as using own initiative. 
-            </Text>
-
-        </View>
-           
-            
-        <View style={{backgroundColor:'white',flex:1,height:600,alignItems:'center'}}>
-            <View style={{backgroundColor:'grey',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Qualifications</Text>
-            </View>
-           
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            National senior certificate</Text>
-            <Text>
-            Selamodi secondary school
+      
               
-            </Text>
-            <Text>2011-2015</Text>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            National Diploma Information
-              Technology</Text>
-            <Text>
-            Tshwane University of Technology
-             
-            </Text>
-            <Text>2016-2019</Text>
-            <View style={{backgroundColor:'grey',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Languages</Text>
-            </View>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            Sepedi</Text>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            English</Text>
-            <View style={{backgroundColor:'grey',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Interests</Text>
-       
-            </View>
-            <Icon name="computer" size={30} color='black'/>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            reading</Text>
-            
-            <View style={{backgroundColor:'grey',borderRadius:7,
-        marginVertical:10}}>
-        <Text style={{fontWeight:'bold',
-        fontSize:30,paddingTop:3}}>Skills</Text>
-       
-            </View>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            Html</Text>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            css</Text>
-            <Text style={{fontWeight:'bold',fontSize:20,paddingTop:3}}>
-            c++</Text>
-        </View>
-        </View>
-        </ScrollView>
-        </SafeAreaView>
+      <GiftedChat
+      messages={messages}
+      onSend={handleSend}
+      user={{ _id: currentUser.uid }}
+      placeholder='Type your message here...'
+      alwaysShowSend
+      showUserAvatar
+      scrollToBottom
+      // renderBubble={renderBubble}
+      // renderLoading={renderLoading}
+      // renderSend={renderSend}
+      // scrollToBottomComponent={scrollToBottomComponent}
+      // renderSystemMessage={renderSystemMessage}
+    />
+      
     )
 }
 
@@ -121,4 +159,27 @@ const styles =StyleSheet.create({
         height: 200,
         resizeMode: 'stretch',
       },
+      loadingContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      sendingContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      bottomComponentContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      systemMessageWrapper: {
+        backgroundColor: 'blue',
+        borderRadius: 4,
+        padding: 5
+      },
+      systemMessageText: {
+        fontSize: 14,
+        color: 'blue',
+        fontWeight: 'bold'
+      }
 })

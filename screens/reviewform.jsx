@@ -5,18 +5,14 @@ import {Formik} from 'formik';
 import * as yup from 'yup'
 
 const Reviewform = ({addUser}) => {
-    //const password=useRef({})
-   // password.current=watch('password','')
+//     const password=useRef({})
+//   password.current=watch('password','')
 
     const ReviewSchem = yup.object({
         name:yup.string().required().min(2),
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
-        confirmPassword:yup.string().required().test('is-num-1-100','The password does not match',
-        (val)=>{
-            return val == val;
-        }
-        ),
+        confirmPassword:yup.string().required().oneOf([yup.ref('password'),null],'password does not match')
         
         //confirmPassword:yup.string().required().min(4),
         // Age:yup.string().required().test('is-num-1-100','Age must be number 1- 100',

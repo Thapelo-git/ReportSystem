@@ -8,17 +8,44 @@ import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native'
 const ShopmindersTap = () => {
     const [selectedImage, setSelectedImage] = useState(null);
-    const [name,setName]=useState()
+  
+    const [email,setEmail]=useState(auth.currentUser?.email)
     const [list,setList]=useState([])
     const user = auth.currentUser;
-    useEffect(()=>{
-      db.ref(`/user/${user.uid}`).on('value',snap=>{
+    // useEffect(()=>{
+    //   // db.ref(`/user/${user.uid}`).on('value',snap=>{
         
-        setName(snap.val().name);
+    //   //    setName(snap.val().displayName);
         
-      })
+    //   // })
+
+    //   db.ref(`user/`).orderByChild('emailId')
+    //   .equalTo(email).once('value')
+    //   .then(snapshot=>{
+    //     // if(snapshot.val()== null){
+          
+    //     // }
+    //     console.log(snapshot.val())
+    //   })
       
-    },[])
+    // },[])
+    const [name, setUserDetail] = useState('');
+      let id = auth.currentUser.uid;
+     
+//   useEffect(() => {
+//  db
+// .ref('user/')
+// .on('value', (dataSnapshot) => {
+// dataSnapshot.forEach((child) => {
+// //if (id === child.val().user.uuid) {
+// setUserDetail({ set state here
+
+// name: child.val().name,
+// });
+// // }
+// });
+// });
+//   }, [id])
     
     const setToastMsg =msg=>{
         ToastAndroid.showWithGravity(msg,ToastAndroid.SHORT,ToastAndroid.CENTER)
@@ -99,6 +126,14 @@ const ShopmindersTap = () => {
     //         }
     //     })
     // }
+    const onSignout =()=>{
+        
+      auth
+      .signOut()
+      .then(
+          setToastMsg('successfully signed out')
+      )
+  }
     return (
         <View>
         {/* <View style={styles.centerContant}>
@@ -133,6 +168,10 @@ const ShopmindersTap = () => {
             Upload ur own image
             </Button> 
            <Text>{name}</Text>
+           <Text>name:{auth?.currentUser?.displayName}</Text>
+           <Button onPress={()=>onSignout() }>
+                Sign Out
+            </Button>
         </View>
     )
 }

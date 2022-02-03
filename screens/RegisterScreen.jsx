@@ -13,21 +13,38 @@ const RegisterScreen = ({navigation}) => {
  // res.user.sendEmailVerification().
     const addUser= async (data)=>{
       try{
-        const {email,password,name} =data
+        const {email,password,name,profileImg} =data
       const user = await auth
       .createUserWithEmailAndPassword(
         email.trim().toLowerCase(),password
       ).then(res =>{
-        db.ref(`/user`).child(res.user.uid).set({
+        // var user = res.user
+        // user.updateProfile({
+          
+        //   email:email,
+        //     name:name,
+        //   email:email,
+        //   uid:res.user.uid,
+        //   profileImg: profileImg
+
+        db.ref('user/').push({
           name:name,
           email:email,
-          uid:res.user.uid
+          uid:res.user.uid,
+          // profileImg: profileImg
+        
+          
         })
+        
+        }).catch((error)=>{
+          alert(error.message)
         })
+       setToastMsg('succesfully registered')
+        }
       
-     setToastMsg('succesfully registered')
+    
 
-      }
+      
       catch(error){
         if(error.code === 'auth/email-already-in-use'){
           Alert.alert(

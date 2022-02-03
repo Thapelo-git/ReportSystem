@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { StyleSheet,View,Text, FlatList,TouchableOpacity ,SafeAreaView,Modal,
     LayoutAnimation, 
     ScrollView} from 'react-native';
-
+import { Header,Button } from 'react-native-elements';
 import Reviewform from './reviewform';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
@@ -11,7 +11,7 @@ import {
   SwipeableQuickActionButton,
 } from 'react-native-swipe-list';
 import { StatusBar } from 'expo-status-bar';
-import { TextInput, Button} from 'react-native-paper';
+
 import {fdb} from './firebase'
 import {auth} from './firebase'
 
@@ -39,7 +39,6 @@ export default function Data({navigation}){
     const handleButtonPress=()=>{
         if(roomName.length>0){
             fdb.collection('THREADS')
-            
             .add({
                 name:roomName,
                 latestMessage:{
@@ -48,9 +47,7 @@ export default function Data({navigation}){
                 }
             })
             .then(docRef=>{
-                docRef.collection('MESSAGES')
-                
-                .add({
+                docRef.collection('MESSAGES').add({
                     
                     text:`you have joined the room ${roomName}.`,
                     createdAt:new Date().getTime(),
@@ -66,24 +63,73 @@ export default function Data({navigation}){
 
     return(
         <SafeAreaView style={{flex:1,backgroundColor:'#fff'}}>
-         <TextInput
-         label='Room name'
-         value={roomName}
-         onChangeText={text=>setRoomName(text)}
-         />
-        <Button mode="contained"
-        onPress={()=>handleButtonPress()}
+           <ScrollView>
+            {/* <Reviewform addReview={addReview}/> */}
+        <View style={styles.container}> 
+      
+        {shopminders.length?(
+            <SafeAreaView>
+            <SwipeableFlatList
+            showsVerticalScrollIndicator={true}
+            contentContainerStyle={{padding:20,paddingBottom:100}}
+            keyExtractor={(item)=>item.id.toString()}
+            data={shopminders}
+            renderItem={({item})=>(
+                <View style={styles.listItem} >
+                    
+                    
+                    
+                
+        <Text style={{fontWeight:'bold',fontSize:20}}>{item.name}  </Text>
+                {/* <Button style={{width:'100%'}}title={"View"}onPress={()=>navigation.navigate('ReviewDetails',item)}/> */}
+               
+                
+                </View>
+                
+            
+            )}
+            
+            
+                renderLeftActions={({item}) => (
+                    <SwipeableQuickActions>
+                     <SwipeableQuickActionButton
+                     onPress={() => { setReviews(reviews.filter(itemm => itemm.key != item.key))
        
-        >
-            Create
-        </Button>
+                       LayoutAnimation.configureNext(
+                         LayoutAnimation.Presets.easeInEaseOut,
+                       );
+                     }}
+                     
+               
+                  
+                     text="Delete"
+                     textStyle={{fontWeight: 'bold', color: 'red'}}
+                     />
+                     {/* <TouchableOpacity onPress={()=>setReviews(reviews.filter(itemm => itemm.key != item.key))}>
+                  <Icon name="delete" size={30} color='red' />
+                  </TouchableOpacity>  */}
+                     
+                    
+                     
+                   </SwipeableQuickActions>)}
+            /> 
+           
+            </SafeAreaView>
+        ):(
+            <Text style={{fontWeight:'bold',fontSize:30}}>No users...</Text>
+        )}
+              
 
-        <Button onPress={()=>navigation.navigate('exmplechat')}>
-            chats
-        </Button>
-        <Button onPress={()=>navigation.navigate('About')}>
-            other
-        </Button>
+           
+        </View>
+        </ScrollView>
+        
+
+        
+        {/* <Button  title={"AddUser"}onPress={()=>navigation.navigate('Adduser')}/>
+         
+        <Button title={"About"}onPress={()=>navigation.navigate('About')}/>
+        <Button title={"Contact"}onPress={()=>navigation.navigate('Contact')}/> */}
     
     
     

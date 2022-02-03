@@ -17,6 +17,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import ShopmindersTap from './ShopmindersTap';
 import SettingsTab from './SettingsTab';
 import forgetPass from './forgetPass';
+import Data from './data';
+import About from './about';
+import compine from './compine';
 export default function Home(){
     const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator()
@@ -60,7 +63,7 @@ export default function Home(){
            if (route.name === 'settings') {
              return (
                <FontAwesome 
-                 name="cogs"
+                 name="location"
                  size={size}
                  color={color}
                />
@@ -85,13 +88,24 @@ export default function Home(){
              
            }}
          />
+          <Tab.Screen 
+           name="SettingsTab"
+
+    component={SettingsTab}
+           options={{
+             title: 'Map',
+             
+           }}
+         />
          <Tab.Screen 
-           name="settings"
-           component={SettingsTab}
+           name="compine"
+           component={compine}
            options={{
              title: 'Settings'
            }}
           />
+           
+           
         </Tab.Navigator>
      </SafeAreaView>
        
