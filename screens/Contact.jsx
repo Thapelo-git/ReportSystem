@@ -14,7 +14,8 @@ const Contact = ({ navigation }) => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER)
   }
   const Submit = async (data) => {
-    console.log('run <<<<<<')
+    const user = auth.currentUser.uid;
+    console.log(user,'run <<<<<<')
     try {
       const { email, password } = data
       const user = await auth

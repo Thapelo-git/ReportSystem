@@ -19,7 +19,7 @@ const ShopmindersTap = () => {
       db.ref(`/user/`+ user).on('value',snap=>{
         
         setName(snap.val() && snap.val().name);
-setPhonenumber(snap.val().Phonenumber)
+    setPhonenumber(snap.val().Phonenumber)
 
       })
       
@@ -77,13 +77,13 @@ setPhonenumber(snap.val().Phonenumber)
         );
       }
       const [imageName,setImageName]=useState('imge')
-    db
-    .storage
-    .ref(imageName)
-    .putfile(selectedImage)
-    .then((snap)=>{
-console.log(`${imageName}`)
-    })
+//     db
+//     .storage
+//     .ref(imageName)
+//     .putfile(selectedImage)
+//     .then((snap)=>{
+// console.log(`${imageName}`)
+//     })
     // const options={
     //     title:'pick an image',
     //     storageOptions:{
@@ -160,7 +160,7 @@ console.log(`${imageName}`)
             </Button> 
            <Text>{name}</Text>
            <Text>{Phonenumber}</Text>
-           <Text>{Password}</Text>
+           {/* <Text>{Password}</Text> */}
         </View>
     )
 }
