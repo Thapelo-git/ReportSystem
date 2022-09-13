@@ -1,20 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { auth } from './Firebase';
+import SplashScreen from './src/Screen/SplashScreen';
+import SignIn from './src/Screen/SignIn';
+import SignUp from './src/Screen/SignUp';
+import ForgetPassword from './src/Screen/ForgetPassword';
+import TabScreen from './src/Screen/TabScreen';
+
+const Stack = createNativeStackNavigator();
+export default function App({navigation}) {
+  const [signedIn,setSignedIn]=useState(false)
+
+  auth.onAuthStateChanged((user)=>{
+    if(user){
+        setSignedIn(true);
+       console.log(user.uid,"user------------")
+     
+    }else{
+     
+        setSignedIn(false);
+    }
+});
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js </Text>
-      <StatusBar style="auto" />
-    </View>
+    
+    <NavigationContainer>
+      {!signedIn ?(
+        <>
+    <Stack.Navigator initialRouteName=" ">
+      <Stack.Screen name="Splash" component={SplashScreen} />
+
+      <Stack.Screen name="SignIn" options = {{headerShown :false}} component={SignIn} />
+      <Stack.Screen name="SignUp" options = {{headerShown :false}} component={SignUp} />
+      <Stack.Screen name="ForgetPassword" options = {{headerShown :false}}  component={ForgetPassword} />
+      </Stack.Navigator>
+      </>
+      ):(
+        <>
+        <Stack.Navigator >
+         
+         <Stack.Screen name="HomeTap" options = {{headerShown :false}} component={TabScreen} />
+      
+   
+    </Stack.Navigator>
+    </>
+      )}
+  </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
 });

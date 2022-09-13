@@ -1,12 +1,11 @@
 import React,{useRef,useState} from 'react'
-// import '../Style/SignIn.css'
-import { Formik } from 'formik'
+import '../Style/SignIn.css'
+import { Formik,Form } from 'formik'
 import * as Yup from 'yup'
-import { useAuth } from '../component/contexts/AuthContext'
-import {Button,Card, Form,Container,Alert} from 'react-bootstrap'
+import {useAuth} from '../component/contexts/AuthContext'
 import { db,auth } from '../firebase'
-import {useNavigate,Link} from 'react-router-dom'
-
+import {useNavigate} from 'react-router-dom'
+import {Alert} from 'react-bootstrap'
 function SignUp() {
   // /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
  // /^([0]{1}|\+?[234]{3})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7})$/g,
@@ -87,82 +86,57 @@ function SignUp() {
             return(
             <>
            
+         {/* onSubmit={handleSubmit} */}
+      <Form >
+        <div className='header'>
+          <h3>SignUp</h3>
+          {error && <Alert variant='danger'>{error}</Alert>}
+        </div>
+        <div className='form_innerCon'>
+      <table>
+        <tr>
+          
+        <td><th><label>Email</label></th>
+        <input placeholder='Enter Email' type='email' className='Signinput' name='email'
+        value={values.email} onChange={handleChange} onBlur={handleBlur}
+        />{
+          errors.email && touched.email?<span className='error'>{errors.email}</span>:null
+        }
         
-        <Container
-    className='d-flex align-items-center justify-content-center'
-    style={{minHeight:"100vh"}}>
-      <div className='w-100' style={{maxWidth:"700px"}}>
-         <Card>
-          <Card.Body>
-            <h2 className='text-center mb-4'>Sign Up</h2>
-            
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form >
-           
-    <div class="mb-3 row">
-    <label  class="col-sm-4 col-form-label">Phone Number</label>
-    <div class="col-sm-8">
-    <input placeholder='Enter Phonenumber' type='text' class="form-control" name='phonenumber'
+        
+        </td>
+        <td><th><label>Phonenumber</label></th>
+        <input placeholder='Enter Phonenumber' type='text' className='Signinput' name='phonenumber'
         value={values.phonenumber}  onChange={handleChange} onBlur={handleBlur}
         />
         {
           errors.phonenumber && touched.phonenumber?<span className='error'>{errors.phonenumber}</span>:null
         }
-    
-    </div>
-    </div>
-            <div class="mb-3 row">
-    <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
-    <div class="col-sm-8">
-       <input placeholder='Enter Email' type='email' class="form-control" name='email'
-        value={values.email} onChange={handleChange} onBlur={handleBlur}
-        />{
-          errors.email && touched.email?<span className='error'>{errors.email}</span>:null
-        }
-    
-    </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="staticEmail" class="col-sm-4 col-form-label">Password</label>
-    <div class="col-sm-8">
-    <input placeholder='Enter Password' type='password' class="form-control" name='password'
+        </td>
+        </tr>
+        <tr>
+        <td><th><label>Password</label></th>
+        <input placeholder='Enter Password' type='password' className='Signinput' name='password'
          value={values.password} onChange={handleChange} onBlur={handleBlur}/>
        {
           errors.password && touched.password?<span className='error'>{errors.password}</span>:null
         }
-      
-    </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="staticEmail" class="col-sm-4 col-form-label">Confirm Password</label>
-    <div class="col-sm-8">
-    <input placeholder='Confirm Password' type='password' class="form-control" name='confirmPassword'
+        </td>
+        <td><th><label>ConfirmPassword</label></th>
+        <input placeholder='Confirm Password' type='password' className='Signinput' name='confirmPassword'
          value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}/>
       {
           errors.confirmPassword && touched.confirmPassword?<span className='error'>{errors.confirmPassword}</span>:null
         }
-      
-    </div>
-  </div>
-          
-              <Button  className='w-100' onClick={()=>handleSubmit}>Sign Up</Button>
-            </Form>
-          </Card.Body>
-          <div class="mb-3 row">
-          {/* <div className='w-100 text-center mt-2'>
-          Already have an account? 
-        </div> */}
-    {/* <div class="col-sm-6">
-    <Link to="/" >Sign In</Link>
-    </div> */}
-    </div>
-          
-        </Card>
-        
-        </div>
-        </Container>
- 
-       </>)
+        </td>
+        </tr>
+      </table>
+      <div className='button_container'>
+        <button type='submit' onClick={()=>handleSubmit} className='button'><h4 className='button_Lable'>Register</h4></button></div>
+   
+      </div>
+      </Form>
+      </>)
           }
       }
       </Formik>

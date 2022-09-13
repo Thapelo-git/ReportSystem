@@ -46,7 +46,7 @@ const Header = () => {
                     <li><Link to="visits"><a>Announcement</a></Link></li>
                     <li><Link to="interviews" >
                     <a >
-                   Interviews
+                   Comfirm Marks
                 </a>
                 </Link></li>
                     <li> <Link to="account" >

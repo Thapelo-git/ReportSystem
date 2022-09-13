@@ -1,5 +1,5 @@
 .cover{
-    background-color: yellow;
+    background-color: #4A1DD6;
     height: 100%;
     width: 100%;
     
@@ -13,7 +13,7 @@
     right: 5%;
     position: absolute;
     padding: 30px 10px;
-    background-color: yellow;
+    background-color: #4A1DD6;
 }
 .form-cover{
    

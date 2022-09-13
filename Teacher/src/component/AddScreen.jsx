@@ -62,7 +62,7 @@ function AddScreen() {
   const handleSubmit = (e)=>{
     e.preventDefault();
     
-        db.ref('Puser').push({name,surname,age,IDnumber,
+        db.ref('Learner').push({name,surname,age,IDnumber,
           Arrestdesc,mentality,
           sentence,caseDesc,url})
        navigate('dashboard/*')
@@ -71,11 +71,11 @@ function AddScreen() {
     <>
     <div className='Add_cover'>
       <div className='headings'>
-        <h3>Upload Information</h3>
+        <h3>Upload Learner Report</h3>
       </div>
       <div className='img_row'>
         
-      <img src={url || "https://media.istockphoto.com/vectors/welcome-hotel-services-on-vector-illustration-vector-id1172931964?k=20&m=1172931964&s=612x612&w=0&h=n8tpGi16ZTNU1quhN-GjONLcgVe6xgzJ2-QaD4_MVU4="} 
+      <img src={url || "https://www.dreamstime.com/photos-images/school-report-card.html"} 
       alt="firebase-image" className='image1'/>
       </div>
       <div className='img_row'>
@@ -114,7 +114,7 @@ function AddScreen() {
           </div>
         </div>
       
-        <div className='headings'>
+        {/* <div className='headings'>
         <h3>Other Information</h3>
       </div>
       <div className='input_row'>
@@ -151,7 +151,7 @@ function AddScreen() {
             onChange={handleInputChange} value={caseDesc}/>
           </div>
         </div>
-       
+        */}
 
       {/* <div className='headings'>
         <h3>Lawyer Information</h3>

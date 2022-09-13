@@ -2,9 +2,7 @@ import React,{useRef,useState} from 'react'
 import '../Style/SignIn.css'
 import { auth } from '../firebase'
 import { useAuth } from './contexts/AuthContext'
-import { useNavigate,Link } from 'react-router-dom'
-
-import {Button,Card, Form,Container,Alert} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 function SignIn() {
   const emailRef=useRef()
     const passwordRef = useRef()
@@ -37,37 +35,32 @@ function SignIn() {
   
   }
   return (
-    <>
-    <Container
-    className='d-flex align-items-center justify-content-center'
-    style={{minHeight:"100vh"}}>
-      <div className='w-100' style={{maxWidth:"400px"}}>
-        <Card>
-          <Card.Body>
-            <h2 className='text-center mb-4'>Log In</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <Form.Group id='email'>
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} requred/>
-              </Form.Group>
-              <Form.Group id='password'>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" ref={passwordRef} requred/>
-              </Form.Group>
-              <Button className='w-100' type="submit">Log In</Button>
-            </Form>
-            {/* <div className='w-100 text-center mt-3'>
-              <Link to="/forgetpassword">forgot Password?</Link>
-            </div> */}
-          </Card.Body>
-        </Card>
-        {/* <div className='w-100 text-center mt-2'>
-         Don't have an account?  <Link to='/Register'>Sign Up</Link>
-        </div> */}
+    <div>
+      <form>
+        <div className='header'>
+          <h3>SignIn</h3>
         </div>
-        </Container></>
-   
+        <div className='form_innerCon'>
+      <table>
+        <tr><p className='error'>{error}</p></tr>
+        <td><th><label>Email</label></th>
+        <input placeholder='Enter Email' type='email'
+         required ref={emailRef} className='Signinput'>
+        </input>
+        </td>
+        <td><th><label>Password</label></th>
+        <input placeholder='Enter Password' type='password'
+         required ref={passwordRef} className='Signinput'>
+        </input>
+        </td>
+        
+      </table>
+      <div className='button_container'>
+        <button className='button' onClick={handleSubmit}><h4 className='button_Lable'>Login</h4></button></div>
+      
+      </div>
+      </form>
+    </div>
   )
 }
 

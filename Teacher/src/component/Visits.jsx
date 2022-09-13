@@ -75,6 +75,11 @@ function Visits() {
           
           <h4>Time</h4>
           <p>{Visits[id].time}</p>
+          
+          </div>
+          <div className='innerView'>
+          <h4>Message</h4>
+          <p>{Visits[id].message}</p>
           </div>
           <button className='deletebtn' onClick={()=>onDelete(id)}>Delete</button>
         </div>
