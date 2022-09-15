@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View,SafeAreaView, Text ,StatusBar,Image,StyleSheet,
-    TextInput,TouchableOpacity,CheckBox, ScrollView,Alert, ActivityIndicator,ToastAndroid} from 'react-native';
+    TextInput,TouchableOpacity, ScrollView,Alert, ActivityIndicator,ToastAndroid} from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Ionicons from "react-native-vector-icons/Ionicons"
@@ -9,10 +9,10 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {Display} from '../utils'
+
 
 //
-import { db, auth } from "./firebase";
+import { auth } from '../../firebase';
 
 const SignIn=({navigation})=>{
     const [isPasswordShow,setPasswordShow]=useState(false)
@@ -50,11 +50,7 @@ const [visiable, setVisiable] = useState(true);
            
             ToastAndroid.show("Succussfully loged in ", ToastAndroid.SHORT)
 
-            // Toast.show({
-            //     type: 'success',
-            //     text1: 'Hello',
-            //     text2: 'This is some something 👋'
-            // });
+           
         } catch (error) {
             Alert.alert(error.name, error.message);
         }
@@ -80,7 +76,7 @@ const [visiable, setVisiable] = useState(true);
 
             <ScrollView>
                 <View style={{alignItems:'center',marginTop:5}}>
-                    <Image source={require('../images/logo.png')}/>
+                    <Image source={require('../Images/kids.jpg')} style={{width:150,height:150}}/>
                 </View>
             <Formik 
                initialValues={{email:'',password:''}}
@@ -135,16 +131,9 @@ const [visiable, setVisiable] = useState(true);
             <Text style={styles.errortext}>{props.touched.password && props.errors.password}</Text>
             <Text></Text>
             <View style={styles.forgotPasswordContainer}>
-                <View style={styles.toggleContainer}>
-                    <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    style={styles.checkbox}/>
-                    
-                    <Text style={styles.rememberMeText}>Remember me</Text>
-                </View>
+               
                 <Text style={styles.forgotPasswordText}
-                onPress={()=>navigation.navigate('ForgetScreen')}
+                onPress={()=>navigation.navigate('ForgetPassword')}
                 >Forget Password</Text>
             </View>
     
@@ -187,7 +176,7 @@ const styles = StyleSheet.create({
     headerTitle:{
       fontSize:20,
       lineHeight:20 * 1.4,
-      width:Display.setWidth(80),
+      width:80,
       textAlign:'center'  
 
     },
@@ -227,7 +216,7 @@ marginHorizontal:20
         fontSize:18,
         textAlignVertical:'center',
         padding:0,
-        height:Display.setHeight(6),
+        height:30,
         color:'black',
         flex:1
 

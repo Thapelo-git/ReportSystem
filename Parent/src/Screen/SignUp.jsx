@@ -8,7 +8,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { db,auth } from '../../Firebase';
+import { auth,db } from '../../firebase';
 //import { max } from 'react-native-reanimated';
 
 
@@ -18,7 +18,8 @@ const [isPasswordShow,setPasswordShow]=useState(false)
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const ReviewSchem=yup.object({
     name:yup.string().required().min(2),
-    phoneNo:yup.string().matches(phoneRegExp,'Phone number is not valid'),
+    surname:yup.string().required().min(2),
+    phoneNo:yup.string().required().min(10).max(10).matches(phoneRegExp,'Phone number is not valid'),
     email:yup.string().required().min(6),
     password:yup.string().required().min(6),
     confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
@@ -28,15 +29,19 @@ const ReviewSchem=yup.object({
 
 const createUser = async (data)=>{
     try{
-      const {uid,email,password,name,phoneNo} =data
-await auth.createUserWithEmailAndPassword(
-  email.trim().toLowerCase(),password
+      const {uid, email, password, name, phoneNo ,surname,
+    } =data
+    const user = await auth.createUserWithEmailAndPassword(
+  email,password
 ).then(res =>{
    
       db.ref(`/Parent`).child(res.user.uid).set({
+        
+        email:email,
         name:name,
-        email:email.trim().toLowerCase(),
         phoneNo:phoneNo,
+        surname:surname, 
+        
         uid:res.user.uid
       })
     //   res.user.sendEmailVerification()
@@ -71,13 +76,14 @@ await auth.createUserWithEmailAndPassword(
                 <View style={{alignItems:'center'}}>
                     <View style={{ alignItems: 'center' }}>
                         <Image
-                            style={{ marginTop: 2, }}
-                            source={require('../images/logo.png')}
+                            style={{ marginTop: 2,width:150,height:150}}
+                            
+                            source={require('../Images/school.jpg')}
                         />
-                        <Text style={{color:'red'}}>{error}</Text>
+                      
                     </View>
                     <Formik
-                    initialValues={{ email: '', password: '',name:'', phoneNo:'', surname:'',passwordConfirm:'',societyCode:'' }}
+                    initialValues={{ email:'', password:'',name:'', phoneNo:'', surname:'',confirmpassword:'',}}
                     validationSchema={ReviewSchem}
                     onSubmit={(values, action) => {
                         action.resetForm()
@@ -165,31 +171,29 @@ await auth.createUserWithEmailAndPassword(
                         <View style={styles.lovers} >
                             <Icon name='lock' size={22} color='black' style={{ margin: 10 }}></Icon>
                             <TextInput style={{ width: "90%" }} 
-                            onChangeText={props.handleChange('passwordConfirm')}
-                            value={props.values.passwordConfirm}
-                             onBlur={props.handleBlur('passwordConfirm')} placeholder="CONFIRM PASSWORD " 
-                             secureTextEntry={visiable}
+                            onChangeText={props.handleChange('confirmpassword')}
+                            value={props.values.confirmpassword}
+                             onBlur={props.handleBlur('confirmpassword')} placeholder="CONFIRM PASSWORD " 
+                             secureTextEntry={isPasswordShow? false :true}
                             ></TextInput>
+                                    <Feather
+                 name={isPasswordShow?"eye-off":"eye"} size={22}
+                 color='black'
+                 style={{marginRight:10}}
+                 onPress={()=>setPasswordShow(!isPasswordShow)}
+                 />
                         </View>
-                        {props.errors.passwordConfirm? <Text style={{color:"red"}}>{props.errors.passwordConfirm}</Text>:null}
+                        {props.errors.confirmpassword? <Text style={{color:"red"}}>{props.errors.confirmpassword}</Text>:null}
 
                        
                     </View>
-                    {
-                        error =='code do not match'?(
-                            <TouchableOpacity style={styles.signinButton} disabled={true} >
-                <Text style={styles.signinButtonText}>
-                REGISTER
-                </Text>
-            </TouchableOpacity>
-                        ):(
+                  
                             <TouchableOpacity style={styles.signinButton} onPress={props.handleSubmit}>
                 <Text style={styles.signinButtonText}>
                 REGISTER
                 </Text>
             </TouchableOpacity>
-                        )
-                    }
+                   
                   
                     <View style={styles.text} >
                         <Text style={{ padding: 8, color: 'gray', }}>

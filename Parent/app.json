@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client_side",
-    "slug": "client_side",
+    "name": "Report_app",
+    "slug": "Report_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

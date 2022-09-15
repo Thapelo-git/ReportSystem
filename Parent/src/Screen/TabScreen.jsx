@@ -2,37 +2,17 @@ import React from 'react';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from './HomeScreen';
+import Profile from './Profile';
+import AnnounceScreen from './AnnounceScreen';
 
 
 const Tab = createMaterialBottomTabNavigator();
-const Stack = createStackNavigator();
 
-function CombinePayment() {
-  return (
-    
-      <Stack.Navigator>
-      <Stack.Screen name="payment" options = {{headerShown :false}}  component={payment} />
-        <Stack.Screen name="paymentScreen" options = {{headerShown :false}}  component={paymentScreen} />
-       
-      </Stack.Navigator>
 
-  );
-}
-// function CombineSettings() {
-//   return (
-    
-//       <Stack.Navigator>
-//       <Stack.Screen name="Settings" options = {{headerShown :false}}  component={SettingsScreen} />
-//         <Stack.Screen name="Account Details"  component={AccountDetails} />
-//         <Stack.Screen name="Help And Support"  component={help} />
-       
-//       </Stack.Navigator>
-    
-//   );
-// }
+
 
 const TabScreen = () => {
     return (
@@ -55,36 +35,28 @@ const TabScreen = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Payments"
-        component={CombinePayment}
+      <Tab.Screen
+        name="Announcement"
+        component={AnnounceScreen}
         options={{
-          tabBarLabel: 'Payments',
+          tabBarLabel: 'Announcement',
           tabBarIcon: ({ color }) => (
-          <Icon name="ios-wallet" color={color} size={24} />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{
-          tabBarLabel: 'Chat',
-          tabBarIcon: ({ color }) => (
-          <Icon name="ios-chatbox" color={color} size={24} />
+          
+          <SimpleLineIcons name="note" type="material" color={color} size={24}/>
           ),
         }}
       />
+    
       <Tab.Screen
         name="Setting"
-        component={CombineSettings}
+        component={Profile}
         options={{
           tabBarLabel: 'Setting',
           tabBarIcon: ({ color }) => (
           <Icon name="ios-settings" color={color} size={24} />
           ),
         }}
-      /> */}
+      />
       </Tab.Navigator>
     )
 }

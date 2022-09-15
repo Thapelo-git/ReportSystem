@@ -1,9 +1,10 @@
 
 import React,{useEffect,useState,Component} from 'react'
-import { db,auth } from '../../Firebase'
+import { db,auth } from '../../firebase'
 import { View, Text, SafeAreaView, ImageBackground ,FlatList,ScrollView,
   Dimensions,StyleSheet,TextInput,Image,TouchableOpacity} from 'react-native'
-// import { Display } from '../utils' 
+
+  
 import Feather from "react-native-vector-icons/Feather"
 import { Card } from 'react-native-elements'
 const screenHeight=Dimensions.get('screen').height
@@ -95,7 +96,7 @@ setUid(snap.val().uid)
       
      
       <View 
-      style={{width:'100%',height:imgContainer,backgroundColor:'#000',
+      style={{width:'100%',height:imgContainer,backgroundColor:'#0225A2',
       justifyContent:'center',alignItems:'center',borderBottomLeftRadius:50,
       borderBottomRightRadius:50}}>
        <View
@@ -107,7 +108,7 @@ setUid(snap.val().uid)
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       {/* 22758486 */}
-     <Text style={{fontWeight:'bold'}}>Enter Learner Name</Text>
+     <Text style={{fontWeight:'bold'}}>Enter Your Learner Name</Text>
 
        <View
                       style={{
@@ -210,7 +211,7 @@ signinButton:{
   backgroundColor:'#000',
   borderRadius:8,
   marginHorizontal:20,
-  height:Display.setHeight(6),
+  height:60,
   justifyContent:'center',
   alignItems:'center',
   marginTop:20,
@@ -225,7 +226,7 @@ signinButton:{
   backgroundColor:'#000',
   borderRadius:8,
   marginHorizontal:20,
-  height:Display.setHeight(6),
+  height:60,
   justifyContent:'center',
   alignItems:'center',
   marginTop:20,

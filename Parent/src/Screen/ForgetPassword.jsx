@@ -12,10 +12,10 @@ const ForgetPassword = ({ navigation }) => {
                 <View style={styles.container1} >
                     <Image
                         style={{ marginTop: 10, elevation: 5, }}
-                        source={require('../images/logo.png')}
+                        source={require('../Images/forgetP.png')}
                     />
-                    <Text style={{ color: 'gray' }}> Lerma whaata ehajk sahjgbcx </Text>
-                    <Text style={{ color: 'gray' }}> Lerma whaata eha </Text>
+                    <Text style={{ color: 'gray' }}> Enter Your Email Address And We  Will Email</Text>
+                    <Text style={{ color: 'gray' }}>You A Link To Reset Password</Text>
                     <View style={styles.inputCon}>
 
                         <View style={styles.lovers} >
@@ -28,7 +28,7 @@ const ForgetPassword = ({ navigation }) => {
                         <TouchableOpacity
                             onPress={() => navigation.navigate('ForgetPasswordSuccessFul')}
                             style={{ backgroundColor: '#0000CD', width: '75%', height: 45, borderRadius: 10, alignItems: 'center', elevation: 10, marginTop: 30 }}>
-                            <Text style={{ padding: 13, color: '#fff', fontSize: 20 }}>
+                            <Text style={{ padding: 8, color: '#fff', fontSize: 20 }}>
                                 CONTINUE
                             </Text>
                         </TouchableOpacity>

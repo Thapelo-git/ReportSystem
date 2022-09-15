@@ -4,8 +4,8 @@ import LottieView from 'lottie-react-native';
 const SplashScreen =({navigation})=>{
 
     setTimeout(()=>{
-      navigation.replace('WelcomeScreen');
-    }, 3000);
+      navigation.replace('SignIn');
+    },5000);
 
     return(
 
@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  hotel: {
+    width:150,
+    height:150,
+    
   },
 });
 
