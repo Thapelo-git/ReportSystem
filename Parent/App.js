@@ -10,6 +10,7 @@ import SignIn from './src/Screen/SignIn';
 import SignUp from './src/Screen/SignUp';
 import ForgetPassword from './src/Screen/ForgetPassword';
 import TabScreen from './src/Screen/TabScreen';
+import UserDetails from './src/Screen/UseDetails';
 
 const Stack = createNativeStackNavigator();
 export default function App({navigation}) {
@@ -35,6 +36,7 @@ export default function App({navigation}) {
     <Stack.Screen name="SignUp" options = {{headerShown :false}} component={SignUp} />
       <Stack.Screen name="ForgetPassword" options = {{headerShown :false}}  component={ForgetPassword} />
       <Stack.Screen name="HomeScreen" options = {{headerShown :false}} component={TabScreen} />
+      <Stack.Screen name="UserDetails" options = {{headerShown :false}} component={UserDetails} />
       </Stack.Navigator>
       {/* {!signedIn ?(
         <>

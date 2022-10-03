@@ -70,7 +70,9 @@ setUid(snap.val().uid)
         })
         setNewPrisoner(newData)
         setSearchtext(text)
-    }}
+    } 
+  
+  }
   const updateID=()=>{
     
     {
@@ -155,7 +157,7 @@ setUid(snap.val().uid)
               NewPrisoner.map(item=>
                 <View style={{padding:5}}>
                   <Text>If this is the correct person click to view all their infor</Text>
-                <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails",{data:item})}>
+                <TouchableOpacity onPress={()=>navigation.navigate("UserDetails",{data:item})}>
           <View style={{flexDirection:'row'}} >
               
                 <View style={{padding:10}}>
