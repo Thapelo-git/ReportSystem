@@ -5,6 +5,7 @@
     flex-direction:row;
     justify-content: center;
     align-items: center;
+    margin: 30;
 }
 .inforRow{
     width: 100%;

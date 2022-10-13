@@ -12,6 +12,7 @@ import {
   ImageBackground, ToastAndroid,
   Dimensions, ImageBackgroud, Animated, Pressable, TextInput
 } from "react-native";
+// import CircularProgress from 'react-native-circular-progress-indicator';
 import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -65,11 +66,30 @@ Surname:  {details.surname}
         <Text>Age: {details.age}</Text>
         <Card.Divider style={{width:10}}/>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-        <View>
         <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
-Case Details
+Subjects and marks
 </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+        <Text>{details.Subject1}</Text>
+        <Text>{details.Results1}</Text>
+        {/* <CircularProgress
+  value={details.Results1}
+  inActiveStrokeColor={'#2ecc71'}
+  inActiveStrokeOpacity={0.2}
+  progressValueColor={'#fff'}
+  valueSuffix={'%'}
+/> */}
+{
+  details.Results1 >49 ? (
+    <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>
+  ):(
+    <Text style={{color:'red',fontWeight:'bold'}}>Fail
+    </Text>
+  )
+
+}
+        <View>
+    
 
 <Text>Case Description: {details.caseDesc}</Text>
 <Text>Life Sentence: {details.sentence}</Text>

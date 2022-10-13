@@ -44,11 +44,11 @@ const Header = () => {
                     <ul className={Mobile ? 'nav-links-mobile' :'link f_flex uppercase'} onClick={()=>setMobile(false)}>
                     <li><Link to="dashboard"><a>Dashboard</a></Link></li>
                     <li><Link to="visits"><a>Announcement</a></Link></li>
-                    <li><Link to="interviews" >
+                    {/* <li><Link to="interviews" >
                     <a >
                    Comfirm Marks
                 </a>
-                </Link></li>
+                </Link></li> */}
                     <li> <Link to="account" >
                     <a >
                    Account

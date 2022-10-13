@@ -1,6 +1,9 @@
 import React,{useRef,useState,useEffect} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Form,Button,Alert} from 'react-bootstrap';
+import {Card,Carousel} from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
 import { db } from '../firebase';
 import '../Style/Visists.css'
@@ -67,8 +70,31 @@ function Visits() {
       <div>
       {
         Object.keys(Visits).map((id)=>
-        <div className='visits_list'>
-        <div className='conView'>
+        <div >
+            <>
+                        <Card className="m-2 p-0 member-con d-flex">
+                          <Card.Body>
+                            <div className="container-xl cont-event">
+                            {/* <h4>Subject  </h4>
+                          
+                              
+                                <input className="form-control w-100 pt-2 mt-2" value={EventType[id].selector} onChange={e=>setSelector(e.target.value)}></input>
+                                <h4>Marks</h4>
+                                <input className="ps-1 mem-email pt-2" value={EventType[id].Results}></input> */}
+                                
+                                <h4>Date</h4>
+          <p>{Visits[id].startDateone}</p>
+          <h4>Time</h4>
+          <p>{Visits[id].time}</p>
+          <h4>Message</h4>
+          <p>{Visits[id].message}</p>
+                            </div>
+                            <Button className="btn d-block acc-update-btn mt-4 bg-danger"
+                            onClick={() => onDelete(id)}>Delete</Button>
+                            </Card.Body>
+                        </Card>
+                            </>
+        {/* <div className='conView'>
           <div className='innerView'>
           <h4>Date</h4>
           <p>{Visits[id].startDateone}</p>
@@ -82,7 +108,7 @@ function Visits() {
           <p>{Visits[id].message}</p>
           </div>
           <button className='deletebtn' onClick={()=>onDelete(id)}>Delete</button>
-        </div>
+        </div> */}
         
           
        

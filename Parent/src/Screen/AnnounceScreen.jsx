@@ -24,7 +24,7 @@ const AnnounceScreen = () => {
               </TouchableOpacity>
           </View>
           <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
-        width:'100%',}}>
+        width:'100%',marginVertical:20}}>
             {
                 page === 0?(<AnnounceUpcoming/>):(null)
             }

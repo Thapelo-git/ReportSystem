@@ -73,7 +73,8 @@ const searchFilterFunction =(text)=>{
             <img src={filteredDataSource[id].url} className="profile_pic"/>
             <p>{filteredDataSource[id].name} </p>
             <p>{filteredDataSource[id].surname}</p>
-            <Link to={`viewuser/${id}`}><i className='fas fa-chevron-right'></i></Link>
+            {/* <i className='fas fa-chevron-right'></i> */}
+            <Link to={`viewuser/${id}`}><h3>Add Marks</h3></Link>
             
             </div>
              )

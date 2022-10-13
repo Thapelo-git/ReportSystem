@@ -3,15 +3,20 @@ import { useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import '../Style/Viewuser.css'
 function Viewuser() {
-  const [illness, setIllness] = useState('');
-  const [Transfed, setTransfed] = useState('');
-  const [PrisonDeath, setPrisonDeath] = useState('');
+  const [Subject1, setSubject1] = useState('');
+  const [Results1, setResults1] = useState('');
+  const [Subject3, setSubject3] = useState('');
+  const [Results3, setResults3] = useState('');
+  const [Subject4, setSubject4] = useState('');
+  const [Results4, setResults4] = useState('');
+  const [Subject5, setSubject5] = useState('');
+  const [Results5, setResults5] = useState('');
   const [data,setData]=useState({})
   let currentId = useParams()
   const {id}=currentId;
 
   useEffect(()=>{
-    db.ref("Puser").on("value",(snap)=>{
+    db.ref("Learner").on("value",(snap)=>{
       setData({
         ...snap.val(),
       })
@@ -19,9 +24,10 @@ function Viewuser() {
   },[id]);
   const update= () => {
 
-    db.ref('Puser').child(id).update({PrisonDeath:PrisonDeath,
-      Transfed:Transfed,illness:illness })
-    .then(()=>db.ref('Puser').once('value'))
+    db.ref('Learner').child(id).update({Subject1:Subject1,Results1:Results1,
+      Subject3:Subject3,Results3:Results3,Subject4:Subject4,Results4:Results4,
+      Subject5:Subject5,Results5:Results5})
+    .then(()=>db.ref('Learner').once('value'))
     .then(snapshot=>snapshot.val())
     .catch(error => ({
       errorCode: error.code,
@@ -37,60 +43,131 @@ function Viewuser() {
       Object.keys(data).map((userId)=>{
         if(userId === id){
           return(<>
-          <div className='viewRow'>
+          <div >
              <div className='input_column'>
-          <div className='imageCover'>
+          {/* <div className='imageCover'>
           <img src={data[id].url} className="image"/>
+      </div> */}
+      <div className='headings'>
+      <div className='input_column'>
+      <p>Name</p> <h3> {data[id].name}</h3> 
       </div>
-      <div className='inforRow'>
-         <p>Name</p> <h3> {data[id].name}</h3> 
-         </div>
-         <h1> <p>Surname</p>  {data[id].surname}</h1>
-          <div className='inforRow'>
-         <p>ID number</p> <h3> {data[id].IDnumber}</h3> 
-         </div>
-         <div className='inforRow'><p>Age</p> <h3> {data[id].age}</h3></div>
+      <div className='input_column'>
+      <p>Surname</p> <h3> {data[id].surname}</h3>
+      </div>
+      <div className='input_column'>
+      <p>Age</p> <h3> {data[id].age}</h3>
+      </div>
+      </div>
+      <div className='headings'>
+      <div className='input_column'>
+      <p>ID number</p> <h3> {data[id].IDnumber}</h3> 
+      </div>
+      
+      </div>
+     
+         <div className='viewRow'></div>
          </div>
           <div>
          <div className='viewRow'>
          <div className='input_column'>
-          <h4>Illness</h4>
+          <p>Subject One</p>
             <select class="custom-select" id="gender3" 
-          value={illness} onChange={e=>setIllness(e.target.value)}
-          >
+          value={Subject1} onChange={e=>setSubject1(e.target.value)} >
             <option selected>Choose...</option>
-            <option  name="illnessNo" >No</option>
-            <option name="illnessYes" >Yes</option>
-           
+            <option  name="English(FAL)" >English(FAL)</option>
+            <option name="English(HL)" >English(HL)</option>
+            <option name="Agriculture" >Agriculture</option>
+            <option name="History" >History</option>
+            <option name="Geography" >Geography</option>
+            <option name="Life-Science" >Life-Science</option>
+            <option name="Physical-Science" >Physical-Science</option>
+            <option name="Economics" >Economics</option>
+            <option name="Accounting" >Accounting</option>
           </select>
         
           </div>
           <div className='input_column'>
-          <h4>Transfed</h4>
+          <p>Results One</p>
+          <input type="tel"  name="Results" value={Results1} onChange={e=>setResults1(e.target.value)}
+           placeholder='Enter Marks'></input>
+           </div>
+          </div>
+          <div className='viewRow'>
+         <div className='input_column'>
+          <p>Subject Three</p>
             <select class="custom-select" id="gender3" 
-          value={Transfed} onChange={e=>setTransfed(e.target.value)} 
-          >
+          value={Subject3} onChange={e=>setSubject3(e.target.value)} >
             <option selected>Choose...</option>
-            <option  name="TransfedNo" >No</option>
-            <option name="TransfedYes" >Yes</option>
-           
+            <option  name="English(FAL)" >English(FAL)</option>
+            <option name="English(HL)" >English(HL)</option>
+            <option name="Agriculture" >Agriculture</option>
+            <option name="History" >History</option>
+            <option name="Geography" >Geography</option>
+            <option name="Life-Science" >Life-Science</option>
+            <option name="Physical-Science" >Physical-Science</option>
+            <option name="Economics" >Economics</option>
+            <option name="Accounting" >Accounting</option>
           </select>
         
           </div>
           <div className='input_column'>
-          <h4> Prisoner Death</h4>
+          <p>Results Three</p>
+          <input type="tel"  name="Results" value={Results3} onChange={e=>setResults3(e.target.value)}
+           placeholder='Enter Marks'></input>
+           </div>
+          </div>
+          <div className='viewRow'>
+         <div className='input_column'>
+          <p>Subject Four</p>
             <select class="custom-select" id="gender3" 
-          value={PrisonDeath} onChange={e=>setPrisonDeath(e.target.value)} 
-          >
+          value={Subject4} onChange={e=>setSubject4(e.target.value)} >
             <option selected>Choose...</option>
-            <option  name="DeathNo" >No</option>
-            <option name="DeathYes" >Yes</option>
-           
+            <option  name="English(FAL)" >English(FAL)</option>
+            <option name="English(HL)" >English(HL)</option>
+            <option name="Agriculture" >Agriculture</option>
+            <option name="History" >History</option>
+            <option name="Geography" >Geography</option>
+            <option name="Life-Science" >Life-Science</option>
+            <option name="Physical-Science" >Physical-Science</option>
+            <option name="Economics" >Economics</option>
+            <option name="Accounting" >Accounting</option>
           </select>
         
+          </div>
+          <div className='input_column'>
+          <p>Results Four</p>
+          <input type="tel"  name="Results" value={Results4} onChange={e=>setResults4(e.target.value)}
+           placeholder='Enter Marks'></input>
+           </div>
+          </div>
+          <div className='viewRow'>
+         <div className='input_column'>
+          <p>Subject Five</p>
+            <select class="custom-select" id="gender3" 
+          value={Subject5} onChange={e=>setSubject5(e.target.value)} >
+            <option selected>Choose...</option>
+            <option  name="English(FAL)" >English(FAL)</option>
+            <option name="English(HL)" >English(HL)</option>
+            <option name="Agriculture" >Agriculture</option>
+            <option name="History" >History</option>
+            <option name="Geography" >Geography</option>
+            <option name="Life-Science" >Life-Science</option>
+            <option name="Physical-Science" >Physical-Science</option>
+            <option name="Economics" >Economics</option>
+            <option name="Accounting" >Accounting</option>
+          </select>
+        
+          </div>
+          <div className='input_column'>
+          <p>Subject Five</p>
+          <input type="tel"  name="Results" value={Results5} onChange={e=>setResults5(e.target.value)}
+           placeholder='Enter Marks'></input>
+           </div>
           </div>
           
-         </div>
+          
+         
          <div className='headings'>
           <button onClick={()=>update()} className='button'><label className='button_Lable'>Submit</label></button>
         </div>

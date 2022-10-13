@@ -38,8 +38,11 @@ setUid(snap.val().uid)
                  key:key,
                 surname:data.surname,
                  name:data.name,
-                 url:data.url,
+                 url:data.url,age:data.age,
                  IDnumber:data.IDnumber,
+                 Subject1:data.Subject1,Results1:data.Results1,
+      Subject3:data.Subject3,Results3:data.Results3,Subject4:data.Subject4,Results4:data.Results4,
+      Subject5:data.Subject5,Results5:data.Results5
                  
              })
        })
