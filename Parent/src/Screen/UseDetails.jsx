@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { useState,useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,6 +17,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "react-native-vector-icons/AntDesign"
+import { db,auth } from '../../firebase';
 import { Card } from 'react-native-elements'
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
@@ -24,13 +25,37 @@ const { height } = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
 const sub = imgContainerHeight * 0.2;
 const UserDetails = ({ navigation, route }) => {
+  const [CurrentName, setName] = useState('')
+  const [Email, setEmail] = useState('')
+  const [PhoneNum, setPhonenumber] = useState('')
+  const [ParentComment,setParentComment]=useState('')
+  const user = auth.currentUser.uid;
+  useEffect(() => {
+      
+      db.ref('/Parent/' + user).on('value', snap => {
+
+          setName(snap.val() && snap.val().name);
+          setPhonenumber(snap.val().phoneNo)
+          setEmail(snap.val().email)
+          
+      })
+
+
+
+  }, [])
+  const updateAccept = (IDnumber,name,surname) => {
+     
+    db.ref('ParentComment').push({
+      CurrentName,Email,PhoneNum,IDnumber,
+      name,surname,ParentComment,
+      })
+      setParentComment('')
+
+}
   const details = route.params.data;
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.imgContaner}>
-
-        <ImageBackground source={{ uri: details.url }} style={{ width: "100%", height: "100%" }} >
-          <View style={styles.headerContainer}
+      <View style={styles.headerContainer}
           >
             <View style={{
               backgroundColor: 'white',
@@ -43,8 +68,12 @@ const UserDetails = ({ navigation, route }) => {
             </View>
             <Text style={styles.headerTitle}></Text>
           </View>
+      {/* <View style={styles.imgContaner}>
+
+        <ImageBackground source={{ uri: details.url }} style={{ width: "100%", height: "100%" }} >
+          
         </ImageBackground>
-      </View>
+      </View> */}
       <View style={styles.cardBox}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
           <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
@@ -165,6 +194,39 @@ Subjects and marks
 </View>
 
         </View>
+        <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+Comments from Teacher
+</Text>
+        <Text>{details.Recommendation}</Text>
+        <Text style={{ color: '#032B7A', fontWeight: 'bold', }} >
+As a Parent tell us more about Learner
+</Text>
+        <View style={styles.inputContainer}>
+                <View style={styles.inputSubContainer}>
+                    {/* <Feather name="user" size={22}
+                    color='#000'
+                    style={{marginRight:10}}/> */}
+                    
+                    <TextInput placeholder="Comment"
+                    selectionColor='gainsboro'
+                    multiline={true}
+                        numberOfLines={5}
+                        textAlignVertical={"top"}
+                    style={styles.inputText}
+                    onChangeText={(text)=>setParentComment(text)}
+                    
+                    value={ParentComment}
+                    
+                    />
+                </View>
+            </View>
+        <TouchableOpacity style={styles.signinButton}
+              onPress={()=>updateAccept(details.IDnumber,details.name,
+                details.surname,)} >
+                <Text style={styles.signinButtonText}
+                
+                >Submit</Text>
+            </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
@@ -178,7 +240,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     padding: 20,
-    marginTop: imgContainerHeight - sub,
+    // marginTop: imgContainerHeight - sub,
     backgroundColor: "white",
     flex: 1,
 
@@ -207,4 +269,31 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20
 
   },
+  signinButton:{
+    backgroundColor:'#fff',
+    borderWidth:1,
+    marginHorizontal:20,
+    height:40,
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:20,
+},
+signinButtonText:{
+    fontSize:18,
+    lineHeight:18 * 1.4,
+    color:'#032B7A',
+    
+},
+inputContainer:{
+  backgroundColor:'#fff',
+marginVertical:10,
+borderWidth:1,
+borderColor:'#000',
+justifyContent:'center',
+width:'100%'
+ },
+ inputSubContainer:{
+     flexDirection:'row',
+     alignItems:'center'
+ },
 })

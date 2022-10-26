@@ -11,6 +11,7 @@ function Viewuser() {
   const [Results4, setResults4] = useState('');
   const [Subject5, setSubject5] = useState('');
   const [Results5, setResults5] = useState('');
+  const [Recommendation,setRecommendation]=useState('')
   const [data,setData]=useState({})
   let currentId = useParams()
   const {id}=currentId;
@@ -26,7 +27,7 @@ function Viewuser() {
 
     db.ref('Learner').child(id).update({Subject1:Subject1,Results1:Results1,
       Subject3:Subject3,Results3:Results3,Subject4:Subject4,Results4:Results4,
-      Subject5:Subject5,Results5:Results5})
+      Subject5:Subject5,Results5:Results5,Recommendation:Recommendation})
     .then(()=>db.ref('Learner').once('value'))
     .then(snapshot=>snapshot.val())
     .catch(error => ({
@@ -160,13 +161,19 @@ function Viewuser() {
         
           </div>
           <div className='input_column'>
-          <p>Subject Five</p>
+          <p>Results Five</p>
           <input type="tel"  name="Results" value={Results5} onChange={e=>setResults5(e.target.value)}
            placeholder='Enter Marks'></input>
            </div>
+          
           </div>
-          
-          
+          <div className='viewRow'>
+          <div className='input_column'>
+          <p>Recommendation OR Any comment</p>
+          <input type="tel"  name="Results" value={Recommendation} onChange={e=>setRecommendation(e.target.value)}
+           placeholder='Enter Comment'></input>
+           </div>
+           </div>
          
          <div className='headings'>
           <button onClick={()=>update()} className='button'><label className='button_Lable'>Submit</label></button>

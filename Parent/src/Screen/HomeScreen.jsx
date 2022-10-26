@@ -42,7 +42,7 @@ setUid(snap.val().uid)
                  IDnumber:data.IDnumber,
                  Subject1:data.Subject1,Results1:data.Results1,
       Subject3:data.Subject3,Results3:data.Results3,Subject4:data.Subject4,Results4:data.Results4,
-      Subject5:data.Subject5,Results5:data.Results5
+      Subject5:data.Subject5,Results5:data.Results5,Recommendation:data.Recommendation
                  
              })
        })
@@ -65,7 +65,7 @@ setUid(snap.val().uid)
   const FilterFunction =(text)=>{
     if(text){
         const newData = Prisoner.filter(function(item){
-            const itemData = item.name? item.name.toUpperCase()
+            const itemData = item.IDnumber? item.IDnumber
             :''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf( textData)>-1;

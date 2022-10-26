@@ -7,7 +7,7 @@ function AddScreen() {
   let navigate =useNavigate()
   const values={
     name:'',surname:'',age:'',IDnumber:'',
-    Arrestdesc:'',mentality:'',
+    Comment:'',mentality:'',
   sentence:'',caseDesc:''
   
   }
@@ -47,7 +47,7 @@ function AddScreen() {
   };
   const [initialState,setState]=useState(values)
   const {name,surname,age,IDnumber,
-    Arrestdesc,mentality,
+    Comment,mentality,
   sentence,caseDesc
 
 }=initialState
@@ -63,7 +63,7 @@ function AddScreen() {
     e.preventDefault();
     
         db.ref('Learner').push({name,surname,age,IDnumber,
-          Arrestdesc,mentality,
+          Comment,mentality,
           sentence,caseDesc,url})
        navigate('dashboard/*')
 }
@@ -102,6 +102,8 @@ function AddScreen() {
             onChange={handleInputChange} value={surname} />
          
           </div>
+          </div>
+          <div className='input_row'>
           <div className='input_column'>
             <label>age</label>
             <input name='age' type='number' className='input_infor' required="required"
