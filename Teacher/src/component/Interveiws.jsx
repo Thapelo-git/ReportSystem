@@ -44,9 +44,10 @@ const onDelete =(id)=>{
     <div className='box btn_shadow'>
           <tr >
             {/* <p>Ticket ID</p> */}
-            <p>{Booking[id].IDnumber}</p>
-            <td>Parent name:</td>
-            <td>{Booking[id].CurrentName}</td>
+            <div className='viewRow'>
+            <td>Learner ID:</td>
+              <p>{Booking[id].IDnumber}</p></div>
+            
             <div className='viewRow'>
             <td>Parent name:</td>
             <td>{Booking[id].CurrentName}</td>
@@ -56,10 +57,10 @@ const onDelete =(id)=>{
             <td> {Booking[id].name}</td>
             </div>
             <div className='viewRow'>
-            <td>Parent Phonenumber</td>
+            <td>Parent Phonenumber: </td>
             <td>{Booking[id].PhoneNum}</td>
             </div>
-            <p>Parent Comment</p>
+            <p>Parent Comment:</p>
             <p>{Booking[id].ParentComment}</p>
           
           

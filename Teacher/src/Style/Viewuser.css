@@ -1,11 +1,11 @@
 .viewRow{
-    width: 100%;
-    height: 120px;
+    width: '100%';
+    height: 30px;
     display: flex;
     flex-direction:row;
     justify-content: center;
     align-items: center;
-    margin: 30;
+    /* margin: 30; */
 }
 .inforRow{
     width: 100%;
