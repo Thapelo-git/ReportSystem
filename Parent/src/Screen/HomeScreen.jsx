@@ -42,8 +42,9 @@ setUid(snap.val().uid)
                  IDnumber:data.IDnumber,
                  Subject1:data.Subject1,Results1:data.Results1,
       Subject3:data.Subject3,Results3:data.Results3,Subject4:data.Subject4,Results4:data.Results4,
-      Subject5:data.Subject5,Results5:data.Results5,Recommendation:data.Recommendation
-                 
+      Subject5:data.Subject5,Results5:data.Results5,Recommendation:data.Recommendation,
+      Subject6:data.Subject6,Results6:data.Results6,
+      Subject7:data.Subject7,Results7:data.Results7,Subject5:data.Subject8,Results8:data.Results8,        
              })
        })
        setPrisoner(Pusers)

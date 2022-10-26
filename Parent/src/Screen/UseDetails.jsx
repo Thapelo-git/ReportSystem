@@ -149,13 +149,7 @@ Subjects and marks
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
         <Text>{details.Subject4}</Text>
         <Text>{details.Results4}</Text>
-        {/* <CircularProgress
-  value={details.Results1}
-  inActiveStrokeColor={'#2ecc71'}
-  inActiveStrokeOpacity={0.2}
-  progressValueColor={'#fff'}
-  valueSuffix={'%'}
-/> */}
+     
 {
   details.Results4 >49 ? (
     <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>
@@ -173,13 +167,58 @@ Subjects and marks
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
         <Text>{details.Subject5}</Text>
         <Text>{details.Results5}</Text>
-        {/* <CircularProgress
-  value={details.Results1}
-  inActiveStrokeColor={'#2ecc71'}
-  inActiveStrokeOpacity={0.2}
-  progressValueColor={'#fff'}
-  valueSuffix={'%'}
-/> */}
+   
+{
+  details.Results5 >49 ? (
+    <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>
+  ):(
+    <Text style={{color:'red',fontWeight:'bold'}}>Fail
+    </Text>
+  )
+
+}
+        <View>
+    
+</View>
+
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+        <Text>{details.Subject6}</Text>
+        <Text>{details.Results6}</Text>
+   
+{
+  details.Results5 >49 ? (
+    <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>
+  ):(
+    <Text style={{color:'red',fontWeight:'bold'}}>Fail
+    </Text>
+  )
+
+}
+        <View>
+    
+</View>
+ </View>
+ <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+        <Text>{details.Subject7}</Text>
+        <Text>{details.Results7}</Text>
+   
+{
+  details.Results5 >49 ? (
+    <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>
+  ):(
+    <Text style={{color:'red',fontWeight:'bold'}}>Fail
+    </Text>
+  )
+
+}
+        <View>
+    
+</View></View>
+<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+        <Text>{details.Subject8}</Text>
+        <Text>{details.Results8}</Text>
+   
 {
   details.Results5 >49 ? (
     <Text style={{color:'green',fontWeight:'bold'}}>Pass</Text>

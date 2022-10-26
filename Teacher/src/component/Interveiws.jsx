@@ -46,7 +46,7 @@ const onDelete =(id)=>{
             {/* <p>Ticket ID</p> */}
             <div className='viewRow'>
             <td>Learner ID:</td>
-              <p>{Booking[id].IDnumber}</p></div>
+            <td>{Booking[id].IDnumber}</td></div>
             
             <div className='viewRow'>
             <td>Parent name:</td>
