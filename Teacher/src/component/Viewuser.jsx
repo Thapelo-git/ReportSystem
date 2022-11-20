@@ -75,9 +75,10 @@ function Viewuser() {
       
       </div>
      
-         <div className='viewRow'></div>
+   
          </div>
           <div>
+          <div className='viewRow'></div>
          <div className='viewRow'>
          <div className='input_column'>
           <p>Subject </p>
@@ -102,6 +103,7 @@ function Viewuser() {
            placeholder='Enter Marks'></input>
            </div>
           </div>
+          <div className='viewRow'></div>
           <div className='viewRow'>
          <div className='input_column'>
           

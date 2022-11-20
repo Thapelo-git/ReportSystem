@@ -1,8 +1,18 @@
-import React from 'react';
-import { View, SafeAreaView, Text, Image, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
+import React,{useState} from 'react';
+import { View, SafeAreaView, Text,Alert, Image, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { db,auth } from '../../Firebase';
 const ForgetPassword = ({ navigation }) => {
-
+    const [email,setEmail]=useState();
+    const reset =async()=>{
+        try{
+            await auth
+            .sendPasswordResetEmail(email)
+            setEmail('')
+        }catch(error){
+            Alert.alert(error.message)
+        }
+    }
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('SignUp')} >
@@ -23,10 +33,14 @@ const ForgetPassword = ({ navigation }) => {
                             <TextInput
                                 style={{ width: '100%', height: 40, borderWidth: 0 }}
                                 autoFocus={true}
+                                keyboardType='email-address'
+             value={email}
+             onChangeText={(e)=>(setEmail(e))}
                                 placeholder="ENTER YOUR EMAIL "  ></TextInput>
                         </View>
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('ForgetPasswordSuccessFul')}
+                            onPress={()=>reset()} 
+                                 
                             style={{ backgroundColor: '#0000CD', width: '75%', height: 45, borderRadius: 10, alignItems: 'center', elevation: 10, marginTop: 30 }}>
                             <Text style={{ padding: 8, color: '#fff', fontSize: 20 }}>
                                 CONTINUE

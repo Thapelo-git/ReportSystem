@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form,Button,Alert} from 'react-bootstrap';
 import {Card,Carousel} from 'react-bootstrap';
 import {FaCheckCircle,FaTimesCircle} from 'react-icons/fa'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const StatusTD=styled.td`
 font-weight:bold;
 color:${(props)=>(props.type === "Pending" ? "blue":"")}
@@ -24,16 +26,11 @@ const Interveiws = () => {
     })
     
   },[])
-  const handleSubmit = (e)=>{
-    e.preventDefault();
-    
-        db.ref('Subject').push({selector,Results})
-       
-}
-const onDelete =(id)=>{
- db.ref(`/Subject/${id}`).remove()
+  const onDelete =(id)=>{
+    db.ref(`/ParentComment/${id}`).remove()
+   
+   }
 
-}
   return (
     <div className='container'>
     {/* <div className='heading'>
@@ -62,7 +59,8 @@ const onDelete =(id)=>{
             </div>
             <p>Parent Comment:</p>
             <p>{Booking[id].ParentComment}</p>
-          
+            <Button className="btn d-block acc-update-btn mt-4 bg-danger"
+                            onClick={() => onDelete(id)}>Delete</Button>
           
           </tr>
           </div>

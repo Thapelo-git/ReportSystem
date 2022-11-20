@@ -1,6 +1,6 @@
 
 import React,{useEffect,useState,Component} from 'react'
-import { db,auth } from '../../firebase'
+import { db,auth } from '../../Firebase'
 import { View, Text, SafeAreaView, ImageBackground ,FlatList,ScrollView,
   Dimensions,StyleSheet,TextInput,Image,TouchableOpacity} from 'react-native'
 
@@ -44,7 +44,7 @@ setUid(snap.val().uid)
       Subject3:data.Subject3,Results3:data.Results3,Subject4:data.Subject4,Results4:data.Results4,
       Subject5:data.Subject5,Results5:data.Results5,Recommendation:data.Recommendation,
       Subject6:data.Subject6,Results6:data.Results6,
-      Subject7:data.Subject7,Results7:data.Results7,Subject5:data.Subject8,Results8:data.Results8,        
+      Subject7:data.Subject7,Results7:data.Results7,Subject8:data.Subject8,Results8:data.Results8,        
              })
        })
        setPrisoner(Pusers)
@@ -114,7 +114,7 @@ setUid(snap.val().uid)
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       {/* 22758486 */}
-     <Text style={{fontWeight:'bold'}}>Enter Your Learner Name</Text>
+     <Text style={{fontWeight:'bold'}}>Enter Your Learner ID number</Text>
 
        <View
                       style={{
@@ -156,7 +156,7 @@ setUid(snap.val().uid)
                 <Text style={styles.signinButtonText}
                 
                 >Submit</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity> */} 
             {
               NewPrisoner.map(item=>
                 <View style={{padding:5}}>

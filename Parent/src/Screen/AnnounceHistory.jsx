@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View,Dimensions } from 'react-native'
 import React,{useState,useEffect,Component} from 'react'
-import { db } from '../../firebase'
+import { db } from '../../Firebase'
 import { Card } from 'react-native-elements'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'

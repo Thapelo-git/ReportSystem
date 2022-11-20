@@ -70,7 +70,7 @@ const searchFilterFunction =(text)=>{
 
                  
             <div className='users'>
-            <img src={filteredDataSource[id].url} className="profile_pic"/>
+             <p>{filteredDataSource[id].IDnumber} </p>
             <p>{filteredDataSource[id].name} </p>
             <p>{filteredDataSource[id].surname}</p>
             {/* <i className='fas fa-chevron-right'></i> */}

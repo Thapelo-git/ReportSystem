@@ -17,7 +17,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "react-native-vector-icons/AntDesign"
-import { db,auth } from '../../firebase';
+import { auth,db } from '../../Firebase';
 import { Card } from 'react-native-elements'
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;

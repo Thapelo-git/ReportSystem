@@ -8,7 +8,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { auth,db } from '../../firebase';
+import { auth,db } from '../../Firebase';
 //import { max } from 'react-native-reanimated';
 
 

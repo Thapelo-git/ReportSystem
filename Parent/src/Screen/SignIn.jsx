@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 //
-import { auth } from '../../firebase';
+import { auth } from '../../Firebase';
 
 const SignIn=({navigation})=>{
     const [isPasswordShow,setPasswordShow]=useState(false)
@@ -105,7 +105,8 @@ const [visiable, setVisiable] = useState(true);
              
             </View>
             <Text style={styles.errortext}>{props.touched.email && props.errors.email}</Text>
-            {/* <Separator height={15}/> */}
+            {/* <Separator height={15}/>
+            91061805492316 */}
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
                 <Icon name="lock" size={22}
@@ -142,9 +143,10 @@ const [visiable, setVisiable] = useState(true);
                 <Text style={styles.signinButtonText}>LOGIN</Text>
             </TouchableOpacity>
             <View style={styles.signupContainer}>
-                <Text style={styles.accountText}>
+                <Text style={styles.accountText}
+                 onPress={()=>navigation.navigate('Phone')}>
                     Don't have account?
-                </Text>
+                </Text> 
                 <Text style={styles.signupText}
                 onPress={()=>navigation.navigate('SignUp')}
                 >Sign Up</Text>

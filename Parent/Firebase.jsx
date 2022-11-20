@@ -5,7 +5,6 @@ import "firebase/auth"
 import "firebase/database"
 import 'firebase/firestore'
 
-
 const app = firebase.initializeApp({
     apiKey: "AIzaSyA-kJPXsOA5sBlV2mG--pHMxLUUnPs4CQA",
     authDomain: "newtodo-e1bcc.firebaseapp.com",

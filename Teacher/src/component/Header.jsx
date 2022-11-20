@@ -51,7 +51,7 @@ const Header = () => {
                 </Link></li>
                     <li> <Link to="account" >
                     <a >
-                   Account
+                 Learners
                 </a>
                 </Link></li> 
                     

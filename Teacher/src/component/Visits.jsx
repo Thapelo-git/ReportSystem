@@ -68,53 +68,35 @@ function Visits() {
       onClick={()=>handleSubmit()}><h4 className='button_Lable'>Submit</h4></button>
       </div>
       <div>
-      {
-        Object.keys(Visits).map((id)=>
-        <div >
-            <>
-                        <Card className="m-2 p-0 member-con d-flex">
-                          <Card.Body>
-                            <div className="container-xl cont-event">
-                            {/* <h4>Subject  </h4>
-                          
-                              
-                                <input className="form-control w-100 pt-2 mt-2" value={EventType[id].selector} onChange={e=>setSelector(e.target.value)}></input>
-                                <h4>Marks</h4>
-                                <input className="ps-1 mem-email pt-2" value={EventType[id].Results}></input> */}
-                                
-                                <h4>Date</h4>
-          <p>{Visits[id].startDateone}</p>
-          <h4>Time</h4>
-          <p>{Visits[id].time}</p>
-          <h4>Message</h4>
-          <p>{Visits[id].message}</p>
-                            </div>
-                            <Button className="btn d-block acc-update-btn mt-4 bg-danger"
-                            onClick={() => onDelete(id)}>Delete</Button>
-                            </Card.Body>
-                        </Card>
-                            </>
-        {/* <div className='conView'>
-          <div className='innerView'>
-          <h4>Date</h4>
-          <p>{Visits[id].startDateone}</p>
-          
-          <h4>Time</h4>
-          <p>{Visits[id].time}</p>
-          
-          </div>
-          <div className='innerView'>
-          <h4>Message</h4>
-          <p>{Visits[id].message}</p>
-          </div>
-          <button className='deletebtn' onClick={()=>onDelete(id)}>Delete</button>
-        </div> */}
+      <div className='dashboard_cover'>
         
-          
-       
-        </div>
-        )
-      }
+           
+            <div className='users_container'>
+              {
+              // Object.keys(user).length>0?(
+                Object.keys(Visits).map((id,index)=>{
+                  return(
+
+                 
+            <div className='users'>
+            <p>{Visits[id].startDateone} </p>
+            <p>{Visits[id].time} </p>
+            <p>{Visits[id].message}</p>
+            
+            <Button className="btn d-block acc-update-btn mt-4 bg-danger"
+                            onClick={() => onDelete(id)}>Delete</Button>
+            </div>
+             )
+            })
+          // ):(<h3>No Users</h3>)
+          }
+            </div>
+            
+           
+   
+  
+   
+    </div>
       </div>
     
     </>

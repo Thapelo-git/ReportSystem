@@ -59,21 +59,23 @@ function AddScreen() {
       [name]:value,
     })
   }
+  const [text,setText]=useState('')
   const handleSubmit = (e)=>{
     e.preventDefault();
     
         db.ref('Learner').push({name,surname,age,IDnumber,
           Comment,mentality,
-          sentence,caseDesc,url})
-       navigate('dashboard/*')
+         })
+      //  navigate('dashboard/*')
+       setText('Successfully Added')
 }
-  return (
+  return ( 
     <>
     <div className='Add_cover'>
       <div className='headings'>
-        <h3>Upload Learner Report</h3>
+        <h3>Upload Learner Details</h3>
       </div>
-      <div className='img_row'>
+      {/* <div className='img_row'>
         
       <img src={url || "https://www.dreamstime.com/photos-images/school-report-card.html"} 
       alt="firebase-image" className='image1'/>
@@ -83,10 +85,8 @@ function AddScreen() {
       placeholder={url} />
               <button className="btn-success" onClick={handleUpload}>Upload</button>
               <progress value={progress} max="1000" />
-              </div>
-      {/* <div className='img_cover'>
-   
-      </div> */}
+              </div> */}
+     
       <div className='form_cover'>
       <form onSubmit={handleSubmit}>
         <div className='input_row'>
@@ -182,6 +182,7 @@ function AddScreen() {
         </div> */}
         <div className='headings'>
           <button type='submit' className='button'><label className='button_Lable'>Submit</label></button>
+          <label>{text}</label>
         </div>
       </form>
       </div>

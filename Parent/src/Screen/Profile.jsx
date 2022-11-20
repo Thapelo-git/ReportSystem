@@ -1,10 +1,28 @@
 
-import React, {Component} from 'react';
-import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid } from 'react-native';
+import React, {useState,useEffect} from 'react';
+import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid,} from 'react-native';
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { auth } from '../../firebase';
+import { db,auth } from '../../Firebase';
 const Profile = ({navigation}) => {
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+    const [phonenumber,setPhonenumber]=useState('')
+    const [Surname,setSurname]=useState('')
+    const [Uid,setUid]=useState('')
+    const user = auth.currentUser.uid;
+    useEffect(()=>{
+        db.ref(`/Parent/`+ user).on('value',snap=>{
+          
+          setName(snap.val() && snap.val().name);
+      setEmail(snap.val().email)
+      setPhonenumber(snap.val().phoneNo)
+    setSurname(snap.val().surname)
+    setUid(snap.val().uid)
+        })
+      
+        
+      },[])
   const onSignout =()=>{
     // auth
     // .signOut()
@@ -25,7 +43,10 @@ const Profile = ({navigation}) => {
                     <View style={{paddingTop: 70, width: '100%', height: 1000}}>
 
                     {/* Account Details */}
-                    <TouchableOpacity >
+                    <TouchableOpacity
+                      onPress={()=>navigation.navigate('EditScreen',{
+                        email:email,name:name,phonenumber:phonenumber,uid:Uid,surname:Surname
+                  })} >
                     <Text style={{paddingBottom: 10}}>
                         My Account
                     </Text>
@@ -50,7 +71,7 @@ const Profile = ({navigation}) => {
                     <Card.Divider/>
 
                     {/* Other Groups     */}
-                    <Text style={{paddingBottom: 10, paddingTop: 15}}>
+                    {/* <Text style={{paddingBottom: 10, paddingTop: 15}}>
                         Notifications
                     </Text>
                     <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
@@ -68,9 +89,9 @@ const Profile = ({navigation}) => {
                         </View>
                     </View>
                     
-                    <Card.Divider/>
+                    <Card.Divider/> */}
 
-                    <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
+                    {/* <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
                     <Text style={{paddingBottom: 10, paddingTop: 15}}>
                         Help
                     </Text>
@@ -89,7 +110,7 @@ const Profile = ({navigation}) => {
                         </View>
                     </View>
                     </TouchableOpacity>
-                    <Card.Divider/>
+                    <Card.Divider/> */}
 
                     {/* Logout     */}
 
